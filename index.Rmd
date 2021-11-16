@@ -20,7 +20,7 @@ librarian::shelf(
 ```
 
 ```{r, message=FALSE}
-api_txt <- "C:/Users/julia/Documents//private/clockify_api-key.txt"
+api_txt <- "/Users/julia/Documents/private/clockify_api-key.txt"
 project_name <- "iea-auto"
 
 # use API key to authenticate
