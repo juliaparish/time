@@ -55,3 +55,4 @@ d_times %>%
   formatRound(columns=c('duration'), digits=3)
 ```
 
+### Making changes and issues
