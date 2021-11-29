@@ -18,13 +18,19 @@ if (!require(librarian)){
   library(librarian)
 }
 librarian::shelf(
-  clockify, dplyr, DT, glue, lubridate, readr)
+  bbest/clockify,
+  dplyr, DT, ggplot2,
+  quiet = TRUE)
+
 ```
 
 ```{r, message=FALSE}
 api_txt <- "/Users/julia/Documents/private/clockify_api-key.txt"
-project_name <- "iea-auto"
+project_name <- "jaws|bren"
 
+```
+
+```{r}
 # use API key to authenticate
 CLOCKIFY_API_KEY <- readLines(api_txt)
 set_api_key(CLOCKIFY_API_KEY)
@@ -33,25 +39,59 @@ set_api_key(CLOCKIFY_API_KEY)
 
 ```{r, message=FALSE}
 # get data
-d_projects <- projects() %>% 
-      select(project_id, project_name)
-d_users <- users() %>% 
-      select(user_id, user_name)
-d_times <- time_entries(concise = F) %>% 
-  left_join(
-    d_projects, by = "project_id") %>% 
-  left_join(
-    d_users, by = "user_id")
+d_times <- time_entries_all()
+# table(d_times$project_name) # confirm project_name
+d_times <- d_times %>%
+  filter(
+    project_name == !!project_name) %>%
+  select(
+    task_name, time_start, duration_hrs, 
+    user_name, description) %>% 
+  arrange(task_name, time_start)
+
+```
+
+## JAWS|BREN {.tabset}
+
+### Overall
+
+```{r}
+# plot ALL
+plot_burndown(
+  d_times,
+  beg = as.Date("2021-10-31"), # day before
+  end = as.Date("2021-12-09"), # day after
+  hrs = 40)
+
+# table ALL
+datatable(d_times)
 ```
 
 ```{r}
-# show table
-d_times %>% 
-  select(
-    user_name, project_name, 
-    time_start, duration, description) %>% 
-  arrange(user_name, project_name, time_start) %>% 
-  datatable() %>%
-  formatRound(columns=c('duration'), digits=3)
+# plot ALL
+plot_burndown(
+  d_times,
+  beg = as.Date("2021-10-31"), # day before
+  end = as.Date("2021-12-09"), # day after
+  hrs = 40)
+
+# table ALL
+datatable(d_times)
 ```
+
+```{r}
+# plot ALL
+plot_burndown(
+  d_times,
+  beg = as.Date("2021-10-31"), # day before
+  end = as.Date("2021-12-09"), # day after
+  hrs = 40)
+
+# table ALL
+datatable(d_times)
+```
+
+
+
+
 
