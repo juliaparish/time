@@ -53,7 +53,7 @@ d_times <- d_times %>%
 
 ## JAWS|BREN {.tabset}
 
-### Overall
+### 1. Overall
 
 ```{r}
 # plot ALL
@@ -67,26 +67,113 @@ plot_burndown(
 datatable(d_times)
 ```
 
-```{r}
-# plot ALL
-plot_burndown(
-  d_times,
-  beg = as.Date("2021-10-31"), # day before
-  end = as.Date("2021-12-09"), # day after
-  hrs = 40)
+### 2. Define Scope/Purpose/Plan
 
-# table ALL
-datatable(d_times)
+```{r}
+# plot scope|purpose|plan
+scope <- "Define Scope/Purpose/Plan"
+
+d_scope <- d_times %>% 
+  filter(task_name == !!scope)
+
+plot_burndown(
+  d_scope,
+  beg = as.Date("2021-10-31"), # day before
+  end = as.Date("2021-11-04"), # day after
+  hrs = 5)
+
+# table scope
+datatable(d_scope)
+```
+### 3. Find Data and Import
+
+```{r}
+# plot find data and import
+data <- "Find Data and Import"
+
+d_data <- d_times %>% 
+  filter(task_name == !!data)
+
+plot_burndown(
+  d_data,
+  beg = as.Date("2021-11-02"), # day before
+  end = as.Date("2021-11-06"), # day after
+  hrs = 5)
+
+# table scope
+datatable(d_data)
+
+```
+### 4. Tidy and Transform
+
+```{r}
+# plot Tidy (clean and combine) and transform
+tidy <- "Tidy (clean and combine) and Transform"
+
+d_tidy <- d_times %>% 
+  filter(task_name == !!tidy)
+
+plot_burndown(
+  d_tidy,
+  beg = as.Date("2021-11-02"), # day before
+  end = as.Date("2021-11-08"), # day after
+  hrs = 5)
+
+# table scope
+datatable(d_tidy)
+```
+### 5. Exploratory Visualization
+
+```{r}
+# plot Exploratory Visualization (Brainstorming)
+viz <- "Exploratory Visualization (Brainstorming)"
+
+d_viz <- d_times %>% 
+  filter(task_name == !!viz)
+
+plot_burndown(
+  d_viz,
+  beg = as.Date("2021-11-07"), # day before
+  end = as.Date("2021-11-20"), # day after
+  hrs = 5)
+
+# table scope
+datatable(d_viz)
 ```
 
-```{r}
-# plot ALL
-plot_burndown(
-  d_times,
-  beg = as.Date("2021-10-31"), # day before
-  end = as.Date("2021-12-09"), # day after
-  hrs = 40)
+### 5. Model/Refine
 
-# table ALL
-datatable(d_times)
+```{r}
+# plot Model/Refine
+model <- "Model/Refine"
+
+d_model <- d_times %>% 
+  filter(task_name == !!model)
+
+plot_burndown(
+  d_model,
+  beg = as.Date("2021-11-11"), # day before
+  end = as.Date("2021-11-30"), # day after
+  hrs = 10)
+
+# table scope
+datatable(d_model)
+```
+### 6. Communicate
+
+```{r}
+# plot Model/Refine
+communicate <- "Communicate"
+
+d_comm <- d_times %>% 
+  filter(task_name == !!communicate)
+
+plot_burndown(
+  d_comm,
+  beg = as.Date("2021-11-14"), # day before
+  end = as.Date("2021-12-09"), # day after
+  hrs = 10)
+
+# table scope
+datatable(d_comm)
 ```
