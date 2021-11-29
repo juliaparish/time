@@ -45,8 +45,8 @@ d_times <- d_times %>%
   filter(
     project_name == !!project_name) %>%
   select(
-    task_name, time_start, duration_hrs, 
-    user_name, description) %>% 
+    task_name, time_start, duration_hrs,
+    user_name, description) %>%
   arrange(task_name, time_start)
 
 ```
@@ -90,8 +90,3 @@ plot_burndown(
 # table ALL
 datatable(d_times)
 ```
-
-
-
-
-
